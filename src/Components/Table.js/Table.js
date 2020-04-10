@@ -93,7 +93,7 @@ export default function MarketCapTable() {
                     </div>
                   </TableCell>
                   <TableCell align="left">
-                    <p style={{ fontWeight: 500 }}>${data.current_price}</p>
+                    <p style={{ fontWeight: 500 }}>${parseFloat(data.current_price).toFixed(2)}</p>
                   </TableCell>
                   <TableCell align="left">
                     <p style={{ fontWeight: 500 }}>
