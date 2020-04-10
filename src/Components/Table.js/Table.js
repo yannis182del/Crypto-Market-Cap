@@ -43,7 +43,16 @@ export default function MarketCapTable() {
 
   return (
     <TableDiv>
-      <TableContainer className={classes.paper} component={Paper}>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+      <TableContainer component={Paper}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead className={classes.head}>
             <TableRow>
@@ -85,15 +94,6 @@ export default function MarketCapTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
     </TableDiv>
   );
 }
