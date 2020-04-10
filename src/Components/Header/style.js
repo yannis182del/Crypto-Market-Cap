@@ -8,9 +8,21 @@ export const HeaderDiv = styled.div`
 
 export const InfoDiv = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
 `;
 
 export const MarketCap = styled.p`
-  font-weight: 700;
+  font-weight: 500;
+  margin-right: 10px;
+  color: #7F8DA2 
+`;
+
+export const MarketNumber = styled.span`
+color: #4785ff
+`
+
+export const MarketCapDiv = styled.div`
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
 `;
