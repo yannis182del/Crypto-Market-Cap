@@ -14,8 +14,8 @@ import { marketCapUrl, COLOR_GREEN, COLOR_RED } from "../../common/common";
 import axios from "axios";
 
 const useStyles = makeStyles({
-  red: { color: COLOR_RED },
-  green: { color: COLOR_GREEN },
+  red: { color: COLOR_RED, fontWeight: 500 },
+  green: { color: COLOR_GREEN, fontWeight: 500 },
 });
 
 export default function MarketCapTable() {
@@ -74,26 +74,36 @@ export default function MarketCapTable() {
                     {data.market_cap_rank}
                   </TableCell>
                   <TableCell align="left">
-                    <div style={{display: "flex"}}>
+                    <div style={{ display: "flex" }}>
                       <img
-                        width="30px"
+                        width="20px"
                         alt="logo"
-                        height="30px"
+                        height="20px"
                         src={data.image}
                       />
-                      <span style={{ fontSize: "15px", fontWeight: 500, marginLeft: 10 }}>
+                      <span
+                        style={{
+                          fontSize: "15px",
+                          fontWeight: 500,
+                          marginLeft: 10,
+                        }}
+                      >
                         {data.name}
                       </span>
                     </div>
                   </TableCell>
-                  <TableCell align="left">${data.current_price}</TableCell>
                   <TableCell align="left">
-                    <NumberFormat
-                      value={data.total_volume}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
+                    <p style={{ fontWeight: 500 }}>${data.current_price}</p>
+                  </TableCell>
+                  <TableCell align="left">
+                    <p style={{ fontWeight: 500 }}>
+                      <NumberFormat
+                        value={data.total_volume}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </p>
                   </TableCell>
                   <TableCell
                     className={
