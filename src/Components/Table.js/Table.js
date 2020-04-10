@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import { TableDiv } from "./style";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 import { marketCapUrl, COLOR_GREEN, COLOR_RED } from "../../common/common";
 import axios from "axios";
 
@@ -24,7 +24,7 @@ export default function MarketCapTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
   const [page, setPage] = React.useState(0);
   const classes = useStyles();
-  const rowPerPage = [10, 25, 100, 250]
+  const rowPerPage = [10, 25, 100, 250];
 
   const handleChangePage = async (event, newPage) => {
     setPage(newPage);
@@ -74,13 +74,27 @@ export default function MarketCapTable() {
                     {data.market_cap_rank}
                   </TableCell>
                   <TableCell align="left">
-                    <p style={{ fontSize: "15px", fontWeight: 500 }}>
-                      <img width="30px" height="30px" src={data.image} />
-                      {data.name}
-                    </p>
+                    <div style={{display: "flex"}}>
+                      <img
+                        width="30px"
+                        alt="logo"
+                        height="30px"
+                        src={data.image}
+                      />
+                      <span style={{ fontSize: "15px", fontWeight: 500, marginLeft: 10 }}>
+                        {data.name}
+                      </span>
+                    </div>
                   </TableCell>
                   <TableCell align="left">${data.current_price}</TableCell>
-                  <TableCell align="left"><NumberFormat value={data.total_volume} displayType={'text'} thousandSeparator={true} prefix={'$'} /></TableCell>
+                  <TableCell align="left">
+                    <NumberFormat
+                      value={data.total_volume}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </TableCell>
                   <TableCell
                     className={
                       data.price_change_percentage_24h < 0

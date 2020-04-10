@@ -4,11 +4,18 @@ export const HeaderDiv = styled.div`
   background-color: #f7f8fa;
   border-bottom: 1px solid #dfe2eb;
   padding: 4px;
+  @media (max-width: 720px) {
+    margin: 0;
+    padding: 0
+  }
 `;
 
 export const InfoDiv = styled.div`
   display: flex;
   justify-content: flex-end;
+  @media (max-width: 720px) {
+  display: none
+  }
 `;
 
 export const MarketCap = styled.p`
