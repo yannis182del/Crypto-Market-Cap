@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderDiv = styled.div`
   background-color: #f7f8fa;
   border-bottom: 1px solid #dfe2eb;
-  padding: 4px;
+  padding: 2px;
   @media (max-width: 720px) {
     margin: 0;
     padding: 0

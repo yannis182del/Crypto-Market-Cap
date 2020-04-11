@@ -27,7 +27,8 @@ export default function MarketCapTable() {
   const rowPerPage = [10, 25, 100, 250];
 
   const handleChangePage = async (event, newPage) => {
-    setPage(newPage);
+     fetchData();
+     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = async (event) => {
@@ -95,7 +96,10 @@ export default function MarketCapTable() {
                   <TableCell align="left">
                     <p style={{ fontWeight: 500 }}>
                       {" "}
-                      ${ data.current_price > 1 ? parseFloat(data.current_price).toFixed(2) : data.current_price}
+                      $
+                      {data.current_price > 1
+                        ? parseFloat(data.current_price).toFixed(2)
+                        : data.current_price}
                     </p>
                   </TableCell>
                   <TableCell align="left">
