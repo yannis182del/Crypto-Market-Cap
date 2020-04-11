@@ -6,3 +6,7 @@ export const TableDiv = styled.div`
     margin: 0;
   }
 `;
+
+export const TableText = styled.p`
+font-weight: 500
+`

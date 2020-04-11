@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { RouterUl, StyledLink, LinkDiv } from "./style";
-import Table from "../Table.js/Table";
+import CoinsTable from "../Components/Tables/CoinsTable";
+import MarketTable from "../Components/Tables/MartketTable"
 
 export default function Routing() {
   return (
@@ -14,7 +15,7 @@ export default function Routing() {
                 <StyledLink to="/">Currencies</StyledLink>
               </li>
               <li>
-                <StyledLink to="/about">About</StyledLink>
+                <StyledLink to="/exchanges">Exhanges</StyledLink>
               </li>
               <li>
                 <StyledLink to="/users">Users</StyledLink>
@@ -27,12 +28,13 @@ export default function Routing() {
         </nav>
 
         <Switch>
-          <Route path="/about">
+          <Route path="/exchanges">
+          <MarketTable />
           </Route>
           <Route path="/users">
           </Route>
           <Route path="/">
-            <Table />
+            <CoinsTable />
           </Route>
         </Switch>
       </div>

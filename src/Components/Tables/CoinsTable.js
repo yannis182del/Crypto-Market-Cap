@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
-import { TableDiv } from "./style";
+import { TableDiv, TableText } from "./style";
 import NumberFormat from "react-number-format";
 import { marketCapUrl, COLOR_GREEN, COLOR_RED } from "../../common/common";
 import axios from "axios";
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   green: { color: COLOR_GREEN, fontWeight: 500 },
 });
 
-export default function MarketCapTable() {
+export default function CoinTables() {
   const [data, setData] = useState([]);
   const [number, setNumber] = useState(250);
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
@@ -27,8 +27,8 @@ export default function MarketCapTable() {
   const rowPerPage = [10, 25, 100, 250];
 
   const handleChangePage = async (event, newPage) => {
-     fetchData();
-     setPage(newPage);
+    fetchData();
+    setPage(newPage);
   };
 
   const handleChangeRowsPerPage = async (event) => {
@@ -54,7 +54,7 @@ export default function MarketCapTable() {
         page={page}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
+        />
       <TableContainer component={Paper}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead className={classes.head}>
@@ -94,23 +94,23 @@ export default function MarketCapTable() {
                     </div>
                   </TableCell>
                   <TableCell align="left">
-                    <p style={{ fontWeight: 500 }}>
+                    <TableText>
                       {" "}
                       $
                       {data.current_price > 1
                         ? parseFloat(data.current_price).toFixed(2)
                         : data.current_price}
-                    </p>
+                    </TableText>
                   </TableCell>
                   <TableCell align="left">
-                    <p style={{ fontWeight: 500 }}>
+                    <TableText>
                       <NumberFormat
                         value={data.total_volume}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
                       />
-                    </p>
+                    </TableText>
                   </TableCell>
                   <TableCell
                     className={

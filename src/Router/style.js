@@ -22,10 +22,6 @@ export const StyledLink = styled(Link)`
     text-decoration: underline;
     color: #4785ff;
   }
-  &.active {
-    text-decoration: underline;
-    color: #4785ff;
-  }
 `;
 
 export const LinkDiv = styled.div`

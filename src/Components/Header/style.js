@@ -6,7 +6,7 @@ export const HeaderDiv = styled.div`
   padding: 2px;
   @media (max-width: 720px) {
     margin: 0;
-    padding: 0
+    padding: 0;
   }
 `;
 
@@ -14,19 +14,19 @@ export const InfoDiv = styled.div`
   display: flex;
   justify-content: flex-end;
   @media (max-width: 720px) {
-  display: none
+    display: none;
   }
 `;
 
 export const MarketCap = styled.p`
   font-weight: 500;
   margin-right: 10px;
-  color: #7F8DA2 
+  color: #7f8da2;
 `;
 
 export const MarketNumber = styled.span`
-color: #4785ff
-`
+  color: #4785ff;
+`;
 
 export const MarketCapDiv = styled.div`
   display: flex;
