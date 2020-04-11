@@ -28,10 +28,8 @@ export default function Routing() {
 
         <Switch>
           <Route path="/about">
-            <About />
           </Route>
           <Route path="/users">
-            <Users />
           </Route>
           <Route path="/">
             <Table />
