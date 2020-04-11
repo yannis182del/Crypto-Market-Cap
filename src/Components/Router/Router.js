@@ -1,27 +1,29 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { RouterUl, StyledLink, LinkDiv } from "./style";
+import Table from "../Table.js/Table";
 
 export default function Routing() {
   return (
     <Router>
       <div>
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
+          <RouterUl>
+            <LinkDiv>
+              <li>
+                <StyledLink to="/">Currencies</StyledLink>
+              </li>
+              <li>
+                <StyledLink to="/about">About</StyledLink>
+              </li>
+              <li>
+                <StyledLink to="/users">Users</StyledLink>
+              </li>
+              <li>
+                <StyledLink to="/trending">Trending</StyledLink>
+              </li>
+            </LinkDiv>
+          </RouterUl>
         </nav>
 
         <Switch>
@@ -32,22 +34,10 @@ export default function Routing() {
             <Users />
           </Route>
           <Route path="/">
-            <Home />
+            <Table />
           </Route>
         </Switch>
       </div>
     </Router>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }

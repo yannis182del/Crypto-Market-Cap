@@ -13,6 +13,7 @@ import {
 export default function Header() {
   const [marketCap, setMarketCap] = useState(null);
   const [dominance, setDominance] = useState(null);
+  const [ethDominance, setEhDominance] = useState(null);
   const [marketChange, setMarketChange] = useState(null);
 
   const fetchData = async () => {
@@ -20,6 +21,9 @@ export default function Header() {
     setMarketCap(result.data.data.total_market_cap.usd);
     setDominance(
       parseFloat(result.data.data.market_cap_percentage.btc).toFixed(2)
+    );
+    setEhDominance(
+      parseFloat(result.data.data.market_cap_percentage.eth).toFixed(2)
     );
     setMarketChange(
       parseFloat(result.data.data.market_cap_change_percentage_24h_usd).toFixed(
@@ -52,6 +56,9 @@ export default function Header() {
           </MarketCap>
           <MarketCap>
             BTC Dominance: <MarketNumber>{dominance}%</MarketNumber>
+          </MarketCap>
+          <MarketCap>
+            ETH Dominance: <MarketNumber>{ethDominance}%</MarketNumber>
           </MarketCap>
         </MarketCapDiv>
       </InfoDiv>
