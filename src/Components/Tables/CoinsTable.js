@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,22 +12,22 @@ import { TableDiv, TableText } from "./style";
 import NumberFormat from "react-number-format";
 import { marketCapUrl, COLOR_GREEN, COLOR_RED } from "../../common/common";
 import axios from "axios";
+import { useData } from "./hooks";
 
 const useStyles = makeStyles({
   red: { color: COLOR_RED, fontWeight: 500 },
   green: { color: COLOR_GREEN, fontWeight: 500 },
 });
 
-export default function CoinTables() {
-  const [data, setData] = useState([]);
-  const [number, setNumber] = useState(250);
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
-  const [page, setPage] = React.useState(0);
+export default function CoinsTables() {
+  const [data, setData] = useData([]);
+  const [number, setNumber] = useData(250);
+  const [rowsPerPage, setRowsPerPage] = useData(20);
+  const [page, setPage] = useData(0);
   const classes = useStyles();
   const rowPerPage = [10, 25, 100, 250];
 
   const handleChangePage = async (event, newPage) => {
-    fetchData();
     setPage(newPage);
   };
 
@@ -35,12 +35,11 @@ export default function CoinTables() {
     await setRowsPerPage(+event.target.value);
   };
 
-  const fetchData = async () => {
-    const result = await axios(marketCapUrl(number));
-    setData(result.data);
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(marketCapUrl(number));
+      setData(result.data);
+    };
     fetchData();
   }, []);
 
@@ -54,7 +53,7 @@ export default function CoinTables() {
         page={page}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+      />
       <TableContainer component={Paper}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead className={classes.head}>

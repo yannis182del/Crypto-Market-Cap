@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { RouterUl, StyledLink, LinkDiv } from "./style";
-import CoinsTable from "../Components/Tables/CoinsTable";
 import MarketTable from "../Components/Tables/MartketTable"
+import CoinsTables from "../Components/Tables/CoinsTable"
 
 export default function Routing() {
   return (
@@ -34,7 +34,7 @@ export default function Routing() {
           <Route path="/users">
           </Route>
           <Route path="/">
-            <CoinsTable />
+            <CoinsTables />
           </Route>
         </Switch>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,6 +12,7 @@ import { TableDiv, TableText } from "./style";
 import NumberFormat from "react-number-format";
 import { globalExhanges, COLOR_GREEN, COLOR_RED } from "../../common/common";
 import axios from "axios";
+import { useData } from "./hooks";
 
 const useStyles = makeStyles({
   red: { color: COLOR_RED, fontWeight: 500 },
@@ -19,14 +20,13 @@ const useStyles = makeStyles({
 });
 
 export default function MarketTable() {
-  const [data, setData] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
-  const [page, setPage] = React.useState(0);
+  const [data, setData] = useData([]);
+  const [rowsPerPage, setRowsPerPage] = useData(20);
+  const [page, setPage] = useData(0);
   const classes = useStyles();
   const rowPerPage = [10, 25, 100, 250];
 
   const handleChangePage = async (event, newPage) => {
-    fetchData();
     setPage(newPage);
   };
 
@@ -34,12 +34,11 @@ export default function MarketTable() {
     await setRowsPerPage(+event.target.value);
   };
 
-  const fetchData = async () => {
-    const result = await axios(globalExhanges);
-    setData(result.data);
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(globalExhanges);
+      setData(result.data);
+    };
     fetchData();
   }, []);
 
