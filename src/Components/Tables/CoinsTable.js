@@ -23,6 +23,7 @@ export default function CoinsTables() {
   const [data, setData] = useData([]);
   const [number, setNumber] = useData(250);
   const [rowsPerPage, setRowsPerPage] = useData(20);
+  const [loading, setLoading] = useData(false);
   const [page, setPage] = useData(0);
   const classes = useStyles();
   const rowPerPage = [10, 25, 100, 250];
@@ -36,96 +37,102 @@ export default function CoinsTables() {
   };
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       const result = await axios(marketCapUrl(number));
       setData(result.data);
+      setLoading(false);
     };
     fetchData();
   }, []);
 
-  return (
-    <TableDiv>
-      <TablePagination
-        rowsPerPageOptions={rowPerPage}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-      <TableContainer component={Paper}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead className={classes.head}>
-            <TableRow>
-              <TableCell>#</TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Prix</TableCell>
-              <TableCell align="left">Volume(24h)</TableCell>
-              <TableCell align="left">Variation (24h)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((data) => (
-                <TableRow key={data.id}>
-                  <TableCell component="th" scope="data">
-                    {data.market_cap_rank}
-                  </TableCell>
-                  <TableCell align="left">
-                    <div style={{ display: "flex" }}>
-                      <img
-                        width="20px"
-                        alt="logo"
-                        height="20px"
-                        src={data.image}
-                      />
-                      <span
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: 500,
-                          marginLeft: 10,
-                        }}
-                      >
-                        {data.name}
-                      </span>
-                    </div>
-                  </TableCell>
-                  <TableCell align="left">
-                    <TableText>
-                      {" "}
-                      $
-                      {data.current_price > 1
-                        ? parseFloat(data.current_price).toFixed(2)
-                        : data.current_price}
-                    </TableText>
-                  </TableCell>
-                  <TableCell align="left">
-                    <TableText>
-                      <NumberFormat
-                        value={data.total_volume}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
-                    </TableText>
-                  </TableCell>
-                  <TableCell
-                    className={
-                      data.price_change_percentage_24h < 0
-                        ? classes.red
-                        : classes.green
-                    }
-                    align="left"
-                  >
-                    {parseFloat(data.price_change_percentage_24h).toFixed(2)}%
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </TableDiv>
-  );
+  if (loading) {
+    return <p>It's loading</p>;
+  } else {
+    return (
+      <TableDiv>
+        <TablePagination
+          rowsPerPageOptions={rowPerPage}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+        <TableContainer component={Paper}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead className={classes.head}>
+              <TableRow>
+                <TableCell>#</TableCell>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="left">Prix</TableCell>
+                <TableCell align="left">Volume(24h)</TableCell>
+                <TableCell align="left">Variation (24h)</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((data) => (
+                  <TableRow key={data.id}>
+                    <TableCell component="th" scope="data">
+                      {data.market_cap_rank}
+                    </TableCell>
+                    <TableCell align="left">
+                      <div style={{ display: "flex" }}>
+                        <img
+                          width="20px"
+                          alt="logo"
+                          height="20px"
+                          src={data.image}
+                        />
+                        <span
+                          style={{
+                            fontSize: "15px",
+                            fontWeight: 500,
+                            marginLeft: 10,
+                          }}
+                        >
+                          {data.name}
+                        </span>
+                      </div>
+                    </TableCell>
+                    <TableCell align="left">
+                      <TableText>
+                        {" "}
+                        $
+                        {data.current_price > 1
+                          ? parseFloat(data.current_price).toFixed(2)
+                          : data.current_price}
+                      </TableText>
+                    </TableCell>
+                    <TableCell align="left">
+                      <TableText>
+                        <NumberFormat
+                          value={data.total_volume}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </TableText>
+                    </TableCell>
+                    <TableCell
+                      className={
+                        data.price_change_percentage_24h < 0
+                          ? classes.red
+                          : classes.green
+                      }
+                      align="left"
+                    >
+                      {parseFloat(data.price_change_percentage_24h).toFixed(2)}%
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </TableDiv>
+    );
+  }
 }
